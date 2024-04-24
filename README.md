@@ -2,12 +2,14 @@
 Basic hardware command line for light sheet system control   
 Useful link https://micro-manager.org/Micro-Manager_Programming_Guide
 
-* [1. System initialzation](#1)
+* [**System initialzation**](#1)
  * [1.1 Laser](#1.1)
  * [1.2 Filter wheel](#1.2)
  * [1.3 Measure computing](#1.3)
  * [1.4 motor stage control](#1.4)
-<h1 id='1'>1. System initalization</h1>  
+* [**Camera**](#2)
+  
+<h1 id='1'>System initalization</h1>  
 The purpose of the initalization is to make sure all devices are connected and able to work.
 
 ```Matlab
@@ -106,6 +108,10 @@ fprintf(sDetLens,['1PR',num2str(stepsize)]);
 fprintf(sDetLens,['1PR-',num2str(stepsize)]); % R means relative, '-' means another direction
 fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 ```
+<h1 id='1'>System initalization</h1>  
 
+```Matlab
+
+```
 
 
