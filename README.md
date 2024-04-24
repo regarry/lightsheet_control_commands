@@ -8,7 +8,7 @@ Useful link https://micro-manager.org/Micro-Manager_Programming_Guide
  * [1.3 Measure computing](#1.3)
  * [1.4 motor stage control](#1.4)
 * [**Camera**](#2)
-* * [**Arbitrary Founction generator**](#3)
+* [**Arbitrary Founction generator**](#3)
 * [**Use python packages and scipts**](#4)
 
   
