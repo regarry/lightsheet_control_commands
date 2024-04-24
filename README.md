@@ -6,7 +6,7 @@ Useful link https://micro-manager.org/Micro-Manager_Programming_Guide
  * [1.1 Laser](#1.1)
  * [1.2 Filter wheel](#1.2)
  * [1.3 Measure computing](#1.3)
- * [1.4 motor stage control](#1.4)
+ * [1.4 Motor stage control](#1.4)
 * [**Camera**](#2)
 * [**Arbitrary Founction generator**](#3)
 * [**Use python packages and scipts**](#4)
@@ -72,7 +72,7 @@ if (avilableLasers(3))
 end
 ```
 
-<h2 id='1.1'>1.1 laser</h2>
+<h2 id='1.1'>1.1 Laser</h2>
 
 ```Matlab
 % standalone software: Coherent Connection 4 
@@ -98,7 +98,7 @@ fprintf(sfWDet, 'pos=4'); % red
 % which is used to change angle of galvo x and y
 outputSingleScan(s1,[value0, value1, value2, value3]);
 ```
-<h2 id='1.4'>1.4 motor stage control</h2>  
+<h2 id='1.4'>1.4 Motor stage control</h2>  
 More command please check CONEX-CC Command Interface User Manual （https://www.newport.com/p/CONEX-TRA12CC）
 
 ```Matlab
