@@ -8,7 +8,8 @@ Useful link https://micro-manager.org/Micro-Manager_Programming_Guide
  * [1.3 Measure computing](#1.3)
  * [1.4 motor stage control](#1.4)
 * [**Camera**](#2)
-* [**Use python packages and scipts**](#3)
+* * [**Arbitrary Founction generator**](#3)
+* [**Use python packages and scipts**](#4)
 
   
 <h1 id='1'>System initalization</h1>  
@@ -116,7 +117,13 @@ fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 
 ```
 
-<h1 id='3'>Use python packages and scipts</h1>  
+<h1 id='3'>Arbitrary Founction generator</h1>  
+
+```Matlab
+
+```
+
+<h1 id='4'>Use python packages and scipts</h1>  
 
 ```Matlab
 
