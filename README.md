@@ -110,7 +110,7 @@ fprintf(sDetLens,['1PR',num2str(stepsize)]);
 fprintf(sDetLens,['1PR-',num2str(stepsize)]); % R means relative, '-' means another direction
 fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 ```
-<h1 id='2' Camera</h1>  
+<h1 id='2'> Camera</h1>  
 
 ```Matlab
 
