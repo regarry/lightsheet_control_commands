@@ -1,0 +1,2674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MATLABInstrumentDriver>
+   <FileVersion>1.0</FileVersion>
+   <DriverName>D:\A\matlab\matlab\toolbox\instrument\instrument\drivers\agilent_33120a.mdd</DriverName>
+   <DriverType>MATLAB interface object</DriverType>
+   <InstrumentType>Function Generator</InstrumentType>
+   <InstrumentManufacturer>Tektronix</InstrumentManufacturer>
+   <InstrumentModel>3000 series</InstrumentModel>
+   <InstrumentVersion>1.0</InstrumentVersion>
+   <Identify>*IDN?</Identify>
+   <Reset>*RST</Reset>
+   <Selftest>*TST?</Selftest>
+   <Error>System:Error?</Error>
+   <CreateInitCode>
+      <Code>function init(obj)
+% This method is called after the object is created.
+% OBJ is the device object.
+% End of function definition - DO NOT EDIT
+</Code>
+   </CreateInitCode>
+   <ConnectInitCode>
+      <Type>InstrumentCommand</Type>
+   </ConnectInitCode>
+   <CleanupCode>
+      <Type>InstrumentCommand</Type>
+   </CleanupCode>
+   <GroupInfo>
+      <Group>
+         <Name>parent</Name>
+         <Description/>
+         <Command/>
+         <Size>1</Size>
+         <Mappings>
+            <ChannelMap Command="parent1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>TriggerSlope</Name>
+               <Location>parent</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>TRIGger:SEQuence:SLOPe</ConfigureCommand>
+                     <QueryCommand>TRIGger:SEQuence:SLOPe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="positive" Value="POSitive"/>
+                     <Enum Name="negative" Value="NEGative"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>positive</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the polarity of the EXT Trig terminal.</Description>
+            </Property>
+            <Property>
+               <Name>TriggerSource</Name>
+               <Location>parent</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>TRIGger:SEQuence:SOURce</ConfigureCommand>
+                     <QueryCommand>TRIGger:SEQuence:SOURce?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="timer" Value="TIMer"/>
+                     <Enum Name="external" Value="EXTernal"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>timer</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the source from which the function generator will accept a trigger.</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo>
+            <Method>
+               <Name>calibration</Name>
+               <Location>parent</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <Line Command="CALibration:ALL" Format="int8" Output="true" ReadOutputAs="Binary"/>
+                  </Commands>
+               </Code>
+               <Description>TRIGGER Send a software trigger to the instrument.
+
+INVOKE(OBJ, 'trigger') sends a software trigger to the instrument.
+</Description>
+            </Method>
+            <Method>
+               <Name>diagnostic</Name>
+               <Location>parent</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <Line Command="DIAGnostic:ALL?" Format="int8" Output="true" ReadOutputAs="Binary"/>
+                  </Commands>
+               </Code>
+               <Description/>
+            </Method>
+            <Method>
+               <Name>trigger</Name>
+               <Location>parent</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <Line Command="*TRG" Output="false"/>
+                  </Commands>
+               </Code>
+               <Description>TRIGGER Send a software trigger to the instrument.
+
+INVOKE(OBJ, 'trigger') sends a software trigger to the instrument.
+</Description>
+            </Method>
+         </MethodInfo>
+      </Group>
+      <Group>
+         <Name>amplitudemodulation</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Depth</Name>
+               <Location>amplitudemodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:AM:DEPTh</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:AM:DEPTh?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="120.0" Min="0.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>100</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the internal modulation depth in percent. 
+
+Select from 0% to 120%. The default is 100%.
+
+If you select an external modulating source, the modulation depth is controlled by the signal level present on the AM Modulation terminal (5 volts peak corresponds to 100% modulation). </Description>
+            </Property>
+            <Property>
+               <Name>Enabled</Name>
+               <Location>amplitudemodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:AM:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:AM:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="off" Value="0"/>
+                     <Enum Name="on" Value="1"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>off</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Disable or enable AM.
+ 
+To ensure proper operation, you should enable AM after you have set up the other modulation parameters. Only one modulation mode can be enabled at a time. When you enable AM the previous modulation is turned off.</Description>
+            </Property>
+            <Property>
+               <Name>InternalFrequency</Name>
+               <Location>amplitudemodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:AM:INTernal:FREQuency</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:AM:INTernal:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="50000.0" Min="0.0020"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.01</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the frequency of the modulating waveform.
+
+Used only when the internal modulation source is selected.
+Select from 10 mHz to 20 kHz. The default is 100 Hz.
+</Description>
+            </Property>
+            <Property>
+               <Name>InternalWaveform</Name>
+               <Location>amplitudemodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:AM:INTernal:FUNCtion</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:AM:INTernal:FUNCtion?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="sin" Value="SIN"/>
+                     <Enum Name="square" Value="SQU"/>
+                     <Enum Name="triangle" Value="TRI"/>
+                     <Enum Name="ramp" Value="RAMP"/>
+                     <Enum Name="pseudo-random noise" Value="PRNoise"/>
+                     <Enum Name="user1" Value="USER1"/>
+                     <Enum Name="user2" Value="USER2"/>
+                     <Enum Name="user3" Value="USER3"/>
+                     <Enum Name="user4" Value="USER4"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>sin</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the shape of the modulating waveform. 
+
+Used only when the internal modulation source is selected. You can use the noise function as the modulating waveform. However, you cannot use the noise function as or dc volts as the carrier waveform.
+</Description>
+            </Property>
+            <Property>
+               <Name>Source</Name>
+               <Location>amplitudemodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:AM:SOURce</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:AM:SOURce?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="internal" Value="INTernal"/>
+                     <Enum Name="external" Value="EXTernal"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>internal</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the source of the modulating signal.
+
+The function generator will accept an internal modulating signal, an external modulating signal, or both. The default is BOTH.
+</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>burstmode</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Cycles</Name>
+               <Location>burstmode</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:BURSt:NCYCles</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:BURSt:NCYCles?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="50000.0" Min="1.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                     <Enum Name="infinity" Value="INF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>1</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the number of cycles to be output per burst( Trigger burst mode only).
+
+Select from one cycle to 50 000 cycles, in 1 cycles increments. The default is 1 cycle.
+</Description>
+            </Property>
+            <Property>
+               <Name>DelayTime</Name>
+               <Location>burstmode</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:BURSt:TDELay</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:BURSt:TDELay?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="50000.0" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.01</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the burst rate for internally triggered bursts.
+
+The burst rate frequency defines the interval between bursts. Select from 10 mHz to 50 kHz. The default is 100 Hz.
+
+The burst rate is used only when internal triggering is enables. The burst rate is ignored when single triggering or external triggering is enabled.
+
+It is possible to specify a burst rate that is too fast for the function generator to output with the specified carrier frequency and burst count. If the burst rate is too high, the function generator will internally adjust it as needed to continuously re-trigger the burst. The adjustment is handled internally by the function generator.
+</Description>
+            </Property>
+            <Property>
+               <Name>Enabled</Name>
+               <Location>burstmode</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:BURSt:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:BURSt:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="1"/>
+                     <Enum Name="off" Value="0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Enable or disable burst modulation. 
+
+To ensure proper operation, you should enable the burst mode after you have set other modulation parameters. Only one modulation mode can be enabled at a time.
+When you enable the burst mode, the previous modulation mode is turned off.
+</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>display</Name>
+         <Description/>
+         <Command/>
+         <Size>1</Size>
+         <Mappings>
+            <ChannelMap Command="Display1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Contrast</Name>
+               <Location>display</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>DISPlay:CONTrast</ConfigureCommand>
+                     <QueryCommand>DISPlay:CONTrast?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="1.0" Min="0.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Turn the front panel display on or off.</Description>
+            </Property>
+            <Property>
+               <Name>Screensaver</Name>
+               <Location>display</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>DISPlay:SAVer:STATe</ConfigureCommand>
+                     <QueryCommand>DISPlay:SAVer:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="ON"/>
+                     <Enum Name="off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>TextClear</Name>
+               <Location>display</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>DISPlay:WINDow:TEXT:CLEar</ConfigureCommand>
+                     <QueryCommand>DISPlay:WINDow:TEXT:CLEar?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>TextMessage</Name>
+               <Location>display</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>DISPlay:WINDow:TEXT:DATA</ConfigureCommand>
+                     <QueryCommand>DISPlay:WINDow:TEXT:DATA?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo>
+            <Method>
+               <Name>TextClear</Name>
+               <Location>display</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <Line Command="DISPlay:WINDow:TEXT:CLEar" Output="false"/>
+                  </Commands>
+               </Code>
+               <Description>INVOKE(obj,settext,text) Display a message containing up to eleven characters on the front panel.</Description>
+            </Method>
+         </MethodInfo>
+      </Group>
+      <Group>
+         <Name>frequency</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Center</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:CENTer</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:CENTer?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MINimum"/>
+                     <Enum Name="maximum" Value="MAXimum"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>450000.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>ConcurrentState</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:CONCurrent</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:CONCurrent?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="ON"/>
+                     <Enum Name="off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Frequency</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Mode</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:MODE</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:MODE?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="Continuous" Value="CW"/>
+                     <Enum Name="Fixed" Value="FIXed"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>Continuous</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Span</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:SPAN</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:SPAN?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Start</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:STARt</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:STARt?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Stop</Name>
+               <Location>frequency</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:STOP</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:STOP?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>frequencymodulation</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Enabled</Name>
+               <Location>frequencymodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FM:STAte</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FM:STAte?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="1"/>
+                     <Enum Name="off" Value="0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Disable or enable FM. 
+
+To ensure proper operation, you should enable FM after you have set up the other modulation parameters. Only one modulation mode can be enabled at a time. When you enable FM, the previous modulation mode is turned off.</Description>
+            </Property>
+            <Property>
+               <Name>InternalDeviation</Name>
+               <Location>frequencymodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FM:DEViation</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FM:DEViation?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="100000.0" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>100</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the peak frequency deviation in Hertz.
+
+This value represents the variation in frequency of the modulating waveform.  from the carrier frequency.
+
+Select from 10 mHz to 7.5 MHz. Default is 100 Hz.
+
+The carrier frequency must always be greater than or equal to the peak Frequency deviation. If you attempt to set the deviation to a value greater than the carrier frequency (with FM enabled), the function generator will automatically adjust the deviation to equal the carrier frequency.
+
+The sum of the carrier frequency and peak frequency deviation must be less than or equal to the maximum frequency for the selected function plus 100 kHz. If you attempt to set the deviation to an invalid value, the multimeter will automatically adjust the value to the maximum value allowed with the present carrier frequency.
+</Description>
+            </Property>
+            <Property>
+               <Name>InternalFrequency</Name>
+               <Location>frequencymodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FM:INTernal:FREQuency</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FM:INTernal:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="10000.0" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.01</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the frequency of the modulating waveform.
+
+Select from 10 mHz to 100 kHz. The default is 10 Hz.</Description>
+            </Property>
+            <Property>
+               <Name>InternalWaveform</Name>
+               <Location>frequencymodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FM:INTernal:FUNCtion</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FM:INTernal:FUNCtion?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="sin" Value="SINusoid"/>
+                     <Enum Name="square" Value="SQUare"/>
+                     <Enum Name="triangle" Value="TRIangle"/>
+                     <Enum Name="ramp" Value="RAMP"/>
+                     <Enum Name="noise" Value="NOIS"/>
+                     <Enum Name="nramp" Value="NRAMp"/>
+                     <Enum Name="PRNoise" Value="PRNoise"/>
+                     <Enum Name="User1" Value="USER1"/>
+                     <Enum Name="User2" Value="USER2"/>
+                     <Enum Name="User3" Value="USER3"/>
+                     <Enum Name="User4" Value="USER4"/>
+                     <Enum Name="EMEMory" Value="EMEMory"/>
+                     <Enum Name="EFILe" Value="EFILe"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue>sin</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the shape of the modulating function.
+
+You can use the noise function as a modulating waveform. However, you cannot use the noise function as a carrier waveform. The default value is SIN.
+</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>fskmodulation</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Enabled</Name>
+               <Location>fskmodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>FSKey:STATe</ConfigureCommand>
+                     <QueryCommand>FSKey:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="1"/>
+                     <Enum Name="off" Value="0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Disable or enable the FSK mode. 
+
+To ensure proper operation, you should enable AM after you have set up the other modulation parameters. Only one modulation mode can be enabled at a time. When you enable AM the previous modulation is turned off.</Description>
+            </Property>
+            <Property>
+               <Name>Frequency</Name>
+               <Location>fskmodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>FSKey:FREQuency</ConfigureCommand>
+                     <QueryCommand>FSKey:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="1.5E7" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.01</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the FSK "hop" frequency from 10 mHz to 15 MHz.
+
+The default value is 100 Hz.</Description>
+            </Property>
+            <Property>
+               <Name>InternalRate</Name>
+               <Location>fskmodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>FSKey:INTernal:RATE</ConfigureCommand>
+                     <QueryCommand>FSKey:INTernal:RATE?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="50000.0" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>10</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the rate at which the internal frequency "shifts" between the carrier and hop frequency. 
+
+Select from 10 mHz to 50 kHz, The default is 10 Hz.
+
+The FSK rate is ignored when the external source is selected.
+</Description>
+            </Property>
+            <Property>
+               <Name>Source</Name>
+               <Location>fskmodulation</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>FSK:SOURCe</ConfigureCommand>
+                     <QueryCommand>FSK:SOURCe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="internal" Value="INT"/>
+                     <Enum Name="external" Value="EXT"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>internal</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select an internal or external FSK.
+
+The default is INT.
+
+When the internal source is selected, the rate at which output frequency "shifts" between carrier frequency and hop frequency is determined by the FSK rate specified.
+
+When external source is selected, the output frequency is determined by the signal level on the rear-panel FSK terminal. When a low "TTL" is level is present, the carrier frequency is output.
+
+The maximum external FSK rate is 1 MHz.
+
+The external annunciator turns on when the function generator is waiting for external trigger signal.
+</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>output</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="OUTPut2" Index="2"/>
+            <ChannelMap Command="OUTPut1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Impedance</Name>
+               <Location>output</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:IMPedance</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:IMPedance?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="10000.0" Min="1.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="Minimum" Value="MINimum"/>
+                     <Enum Name="Maximum" Value="MAXimum"/>
+                     <Enum Name="Infinity" Value="INFinity"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>1.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Polarity</Name>
+               <Location>output</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:POLarity</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:POLarity?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="Normal" Value="NORMal"/>
+                     <Enum Name="Inverted" Value="INVerted"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>Normal</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>State</Name>
+               <Location>output</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="On" Value="ON"/>
+                     <Enum Name="Off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>On</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Trigger</Name>
+               <Location>output</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:TRIGger:MODE</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:TRIGger:MODE?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="Trigger" Value="TRIGger"/>
+                     <Enum Name="Sync" Value="SYNC"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>Trigger</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>phase</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Adjust</Name>
+               <Location>phase</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PHASe:ADJust</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PHASe:ADJust?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="180.0" Min="-180.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>-180.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the phase of output waveform for the specified
+channel. You can set the value in radians or degrees. If no units are specified, the
+default is RAD. The query command returns the value in RAD.
+This command is supported when you select a waveform other than DC, Noise, and
+Pulse.</Description>
+            </Property>
+            <Property>
+               <Name>Initiate</Name>
+               <Location>phase</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PHASe:INITiate</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PHASe:INITiate?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command synchronizes the phase of CH 1 and CH 2 output waveforms. The
+arbitrary/function generator performs the same operation if you specify either
+SOURce1 or SOURce2.
+
+(no query form)</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>pm</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Deviation</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:DEViation</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:DEViation?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="180.0" Min="-180.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Efile</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:INTernal:FUNCtion:EFILe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:INTernal:FUNCtion:EFILe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries an EFILe name used as a modulating waveform for
+PM modulation. A file name must be specified in the mass storage system. This
+command returns “ ” if there is no file in the mass storage.</Description>
+            </Property>
+            <Property>
+               <Name>Frequency</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:INTernal:FREQuency</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:INTernal:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Function</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:INTernal:FUNCtion</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:INTernal:FUNCtion?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="sin" Value="SIN"/>
+                     <Enum Name="square" Value="SQU"/>
+                     <Enum Name="triangle" Value="TRI"/>
+                     <Enum Name="ramp" Value="RAMP"/>
+                     <Enum Name="Nramp" Value="NRAM"/>
+                     <Enum Name="pseudo-rand noise" Value="PRN"/>
+                     <Enum Name="user1" Value="USER1"/>
+                     <Enum Name="user2" Value="USER2"/>
+                     <Enum Name="user3" Value="USER3"/>
+                     <Enum Name="user4" Value="USER4"/>
+                     <Enum Name="Ememory" Value="EMEM"/>
+                     <Enum Name="Efile" Value="EFIL"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Source</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:SOURce</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:SOURce?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="internal" Value="INTernal"/>
+                     <Enum Name="external" Value="EXTernal"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>internal</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>State</Name>
+               <Location>pm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PM:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PM:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="ON"/>
+                     <Enum Name="off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>Power</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce4" Index="2"/>
+            <ChannelMap Command="SOURce3" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Level</Name>
+               <Location>Power</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;::POWer:LEVel:IMMediate:AMPLitude</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;::POWer:LEVel:IMMediate:AMPLitude?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="100.0" Min="0.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the internal noise level which applies to the output
+signal for the specified channel. The noise level represents the percent against
+current amplitude level. The setting range is 0 to 50%.
+This command is available when Run Mode is set to Continuous, Burst, or Sweep.
+You can set or query whether to add the internal noise to the output signal using the
+[SOURce[1|2]]:COMBine:FEED command.</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>pulse</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>DutyCycle</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:DCYCle</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:DCYCle?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="99.9" Min="0.1"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.1</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the duty cycle of the pulse waveform for the specified
+channel. The setting range is 0.1% to 99.9% in increments of 0.1.
+
+The arbitrary/function generator will hold the settings of leading edge and trailing
+edge when the duty cycle is varied.</Description>
+            </Property>
+            <Property>
+               <Name>Hold</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:HOLD</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:HOLD?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="width" Value="WIDTh"/>
+                     <Enum Name="duty" Value="DUTY"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>width</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>The [SOURce[1|2]]:PULSe:HOLD command sets the arbitrary/function generator
+to hold either pulse width or pulse duty.</Description>
+            </Property>
+            <Property>
+               <Name>LeadDelay</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:DELay</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:DELay?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the lead delay of the pulse waveform for the specified
+channel.
+
+Setting range: 0 ns to Pulse Period – {Pulse Width + 0.8 × (Leading Edge Time +
+Trailing Edge Time)}</Description>
+            </Property>
+            <Property>
+               <Name>LeadingEdgeTime</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:TRANsition:LEADing</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:TRANsition:LEADing?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Period</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:PERiod</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:PERiod?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>TrailingEdgeTime</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:TRANsition:TRAiling</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:TRANsition:TRAiling?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Width</Name>
+               <Location>pulse</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PULSe:WIDTh</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PULSe:WIDTh?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the pulse width for the specified channel.
+
+Pulse Width = Period × Duty Cycle / 100
+
+The pulse width must be less than the period. The setting range is 0.1% to 99.9%
+in terms of duty cycle.
+
+AFG3021 and AFG3022: 30 ns to 999 s
+AFG3101 and AFG3102: 8 ns to 999 s
+AFG3251 and AFG3252: 4 ns to 999 s
+
+Pulse Width ≤ Pulse Period – 0.8 × (Leading Edge Time + Trailing Edge Time)
+Pulse Width ≥ 0.625 × (Leading Edge Time + Trailing Edge Time)</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>pwm</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Deviation</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:DEViation:DCYCle</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:DEViation:DCYCle?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="100.0" Min="0.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="minimum" Value="MIN"/>
+                     <Enum Name="maximum" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the PWM deviation in percent for the specified
+channel.
+
+The setting range must meet the following conditions:
+Deviation ≤ Pulse Width – PWmin
+Deviation ≤ Pulse Period – Pulse Width – PWmin
+Deviation ≤ Pulse Width – 0.8 × (Leading Edge Time + Trailing Edge Time)
+Deviation ≤ Pulse Period – Pulse Width – 0.8 × (Leading Edge Time + Trailing
+Edge Time)
+where PWmin is the minimum pulse width.</Description>
+            </Property>
+            <Property>
+               <Name>Function</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:INTernal:FUNCtion</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:INTernal:FUNCtion?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="sin" Value="SIN"/>
+                     <Enum Name="square" Value="SQU"/>
+                     <Enum Name="triangle" Value="TRI"/>
+                     <Enum Name="ramp" Value="RAMP"/>
+                     <Enum Name="Nramp" Value="NRAM"/>
+                     <Enum Name="pseudo-random noise" Value="PRN"/>
+                     <Enum Name="user1" Value="USER1"/>
+                     <Enum Name="user2" Value="USER2"/>
+                     <Enum Name="user3" Value="USER3"/>
+                     <Enum Name="user4" Value="USER4"/>
+                     <Enum Name="EMemory" Value="EMEM"/>
+                     <Enum Name="EFile" Value="EFIL"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>sin</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>InternalFrequency</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:INTernal:FREQuency</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:INTernal:FREQuency?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>InternalFunctionEfile</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:INTernal:FUNCtion:EFILe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:INTernal:FUNCtion:EFILe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries an EFILe name used as a modulating waveform for
+PWM modulation. A file name must be specified in the mass storage system. This
+command causes an error if there is no file in the mass storage.
+
+Examples: SOURce1:PWM:INTernal:FUNCtion:EFILe “SAMPLE1”
+creates a file named “SAMPLE1” in the mass storage.</Description>
+            </Property>
+            <Property>
+               <Name>Source</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:SOURce</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:SOURce?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="internal" Value="INT"/>
+                     <Enum Name="external" Value="EXT"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>internal</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>State</Name>
+               <Location>pwm</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:PWM:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:PWM:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="ON"/>
+                     <Enum Name="off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>on</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>RefOscillator</Name>
+         <Description/>
+         <Command/>
+         <Size>1</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>SOURce</Name>
+               <Location>RefOscillator</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:ROSCillator:SOURce</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:ROSCillator:SOURce?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="internal" Value="INT"/>
+                     <Enum Name="external" Value="EXT"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>StatusRegs</Name>
+         <Description/>
+         <Command/>
+         <Size>1</Size>
+         <Mappings>
+            <ChannelMap Command="StatusRegs1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>OperationCondition</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand/>
+                     <QueryCommand>STATus:OPERation:CONDition?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>OperationEnable</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>STATus:OPERation:ENABle</ConfigureCommand>
+                     <QueryCommand>STATus:OPERation:ENABle?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>OperationEvent</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand/>
+                     <QueryCommand>STATus:OPERation:EVENt?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Preset</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>STATus:PRESet</ConfigureCommand>
+                     <QueryCommand/>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>QuestionableCondition</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand/>
+                     <QueryCommand>STATus:QUEStionable:CONDition?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>QuestionableEnable</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>STATus:QUEStionable:ENABle</ConfigureCommand>
+                     <QueryCommand>STATus:QUEStionable:ENABle?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>QuestionableEvent</Name>
+               <Location>StatusRegs</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand/>
+                     <QueryCommand>STATus:QUEStionable:EVENt?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>sweep</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Enabled</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:MODE</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:MODE?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="off" Value="CW"/>
+                     <Enum Name="on" Value="SWEEP"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>On</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>HoldTime</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:SWEep:HTIMe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:SWEep:HTIMe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Mode</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:SWEep:MODE</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:SWEep:MODE?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="AUTO" Value="AUTO"/>
+                     <Enum Name="MANual" Value="MAN"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>ReturnTime</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:SWEep:RTIMe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:SWEep:RTIMe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <DependentProperty>Time</DependentProperty>
+                  <DependentPropertyValue>min</DependentPropertyValue>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Spacing</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:SWEep:SPACing</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:SWEep:SPACing?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="linear" Value="LIN"/>
+                     <Enum Name="log" Value="LOG"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>linear</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Select the linear or the algorithmic spacing for the sweep.
+
+The default is linear.</Description>
+            </Property>
+            <Property>
+               <Name>Start</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:STARt</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:STARt?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="1.5E7" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.01</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the start frequency 
+
+Select from 10 mHz to 15 MHz. the sweep is phase continuous over the full frequency range. The default is 100 Hz.]
+
+Executing the *RST command does not set the start and stop frequency to their default values. Instead the restart operation set the start frequency to 10 mHz(minimum) and the stop frequency to 15 MHz (maximum).
+</Description>
+            </Property>
+            <Property>
+               <Name>Stop</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FREQuency:STOP</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FREQuency:STOP?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="max" Value="MAX"/>
+                     <Enum Name="min" Value="MIN"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="1.5E7" Min="0.01"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>1000</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the stop frequency. 
+
+Select from 10mHz to 15 MHz. The sweep is phase is continuous over the full frequency range. The default is 1 kHz.
+
+Executing the *RST command does not set the start and stop frequency to their default values. Instead the restart operation set the start frequency to 10 mHz(minimum) and the stop frequency to 15 MHz (maximum). </Description>
+            </Property>
+            <Property>
+               <Name>Time</Name>
+               <Location>sweep</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:SWEep:TIME</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:SWEep:TIME?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="500.0" Min="0.0010"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>1</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>Set the number of seconds required to sweep from start of the frequency sweep to stop frequency.
+
+Select from 1 ms to 500 seconds.
+
+The number of frequency points in the sweep depends on the sweep time you select and is automatically calculated by the function generator.
+</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>system</Name>
+         <Description/>
+         <Command/>
+         <Size>1</Size>
+         <Mappings/>
+         <PropertyInfo>
+            <Property>
+               <Name>Version</Name>
+               <Location>system</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand/>
+                     <QueryCommand>System:VERsion?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>always</ReadOnly>
+               <Description>Query the function generator to determine the present SCPI version.</Description>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo>
+            <Method>
+               <Name>beep</Name>
+               <Location>system</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <Line Command="SYSTem:BEEPer" Output="false"/>
+                  </Commands>
+               </Code>
+               <Description>INVOKE(obj,beep) to issue asingle beep immediately.
+</Description>
+            </Method>
+            <Method>
+               <Name>deletestate</Name>
+               <Location>system</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function deletestate(obj, location)
+% OBJ is the group object.
+% LOCATION is the specified storage location
+
+% Get the interface
+interface = get(get(obj,'parent'),'interface');
+
+% Error checking
+    % LOCATION must be a scalar and between 0 and 4, inclusive.
+    if ~isnumeric(location) 
+        error('LOCATION must be numeric');
+    elseif  location &gt;4 || location &lt;0
+            error('LOCATION must be between 0 and 4 inclusive');
+    end
+    
+% Send memory name query command
+fprintf(interface,['MEMory:STATe:DELete ' num2str(location)])
+
+% Return state name
+propertyValue = fscanf(interface)</MCode>
+               </Code>
+               <Description>INVOKE(obj,loadstate,location) to delete a previously stored state.</Description>
+            </Method>
+            <Method>
+               <Name>loadstate</Name>
+               <Location>system</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function loadstate(obj,location)
+% OBJ is the group object.
+% LOCATION is the specified storage location
+
+% Get the interface
+interface = get(get(obj,'parent'),'interface');
+
+% Error checking
+    % LOCATION must be a scalar and between 0 and 4, inclusive.
+    if ~isnumeric(location) 
+        error('LOCATION must be numeric');
+    elseif  location &gt;4 || location &lt;0
+            error('LOCATION must be between 0 and 4 inclusive');
+    end
+    
+% Send memory name query command
+fprintf(interface,['*RCL ' num2str(location)])
+
+% Return state name
+propertyValue = fscanf(interface)</MCode>
+               </Code>
+               <Description>INVOKE(obj,loadstate,location) to recall a previously stored state.</Description>
+            </Method>
+            <Method>
+               <Name>savestate</Name>
+               <Location>system</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>MCode</Type>
+               <Code>
+                  <MCode>function savestate(obj,location)
+% OBJ is the group object.
+% LOCATION is the specified storage location
+
+% Get the interface
+interface = get(get(obj,'parent'),'interface');
+
+% Error checking
+    % LOCATION must be a scalar and between 0 and 4, inclusive.
+    if ~isnumeric(location) 
+        error('LOCATION must be numeric');
+    elseif  location &gt;4 || location &lt;0
+            error('LOCATION must be between 0 and 4 inclusive');
+    end
+    
+% Send memory name query command
+fprintf(interface,['*SAV ' num2str(location)])
+
+% Return state name
+propertyValue = fscanf(interface)</MCode>
+               </Code>
+               <Description>INVOKE(obj,savestate,location) to store an instrument configuration at a LOCATION.
+</Description>
+            </Method>
+         </MethodInfo>
+      </Group>
+      <Group>
+         <Name>voltage</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>Amplitude</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:AMPLitude</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:AMPLitude?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>concurrent</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:CONCurrent:STATe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:CONCurrent:STATe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="on" Value="ON"/>
+                     <Enum Name="off" Value="OFF"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command enables or disables the function to copy the voltage level of one
+channel to another channel.
+
+The[SOURce[1|2]]:VOLTage:CONCurrent[:STATe] command copies the
+voltage level of the channel specified by the header suffix to another channel. If
+you specify CH 1 with the header, the CH 1 voltage level will be copied to CH 2.
+
+The query command returns “0” (off) or “1” (on).
+
+If your arbitrary/function generator is a single-channel model, this command is not
+supported.</Description>
+            </Property>
+            <Property>
+               <Name>Highlevel</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:HIGH</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:HIGH?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Highlimit</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:LIMit:HIGH</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:LIMit:HIGH?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Lowlevel</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:LOW</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:LEVel:IMMediate:LOW?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>Lowlimit</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:LIMit:LOW</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:LIMit:LOW?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MIN"/>
+                     <Enum Name="max" Value="MAX"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+            <Property>
+               <Name>unit</Name>
+               <Location>voltage</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:VOLTage:UNIT</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:VOLTage:UNIT?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="Vpp" Value="VPP"/>
+                     <Enum Name="VRMS" Value="VRMS"/>
+                     <Enum Name="DMB" Value="DBM"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+      <Group>
+         <Name>waveform</Name>
+         <Description/>
+         <Command/>
+         <Size>2</Size>
+         <Mappings>
+            <ChannelMap Command="SOURce2" Index="2"/>
+            <ChannelMap Command="SOURce1" Index="1"/>
+         </Mappings>
+         <PropertyInfo>
+            <Property>
+               <Name>EFile</Name>
+               <Location>waveform</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FUNCtion:EFILe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FUNCtion:EFILe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>none</Constraint>
+               </PermissibleType>
+               <DefaultValue/>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries an EFILe name used as an output waveform. A file
+name must be specified in the mass storage system. This command returns “ ” if
+there is no file in the mass storage.</Description>
+            </Property>
+            <Property>
+               <Name>Ramp</Name>
+               <Location>waveform</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FUNCtion:RAMP:SYMMetry</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FUNCtion:RAMP:SYMMetry?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>Double</Type>
+                  <Constraint>bounded</Constraint>
+                  <ConstraintValue>
+                     <Range Max="100.0" Min="0.0"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="min" Value="MINimum"/>
+                     <Enum Name="max" Value="MAXimum"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>0.0</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description>This command sets or queries the symmetry of ramp waveform for the specified
+channel.</Description>
+            </Property>
+            <Property>
+               <Name>Shape</Name>
+               <Location>waveform</Location>
+               <CapabilityGroup>Base</CapabilityGroup>
+               <Type>InstrumentCommand</Type>
+               <Code>
+                  <Commands>
+                     <ConfigureCommand>&lt;ID&gt;:FUNCtion:SHAPe</ConfigureCommand>
+                     <QueryCommand>&lt;ID&gt;:FUNCtion:SHAPe?</QueryCommand>
+                  </Commands>
+               </Code>
+               <PermissibleType>
+                  <Type>String</Type>
+                  <Constraint>enum</Constraint>
+                  <ConstraintValue>
+                     <Enum Name="sin" Value="SINusoid"/>
+                     <Enum Name="square" Value="SQUare"/>
+                     <Enum Name="pulse" Value="PULSe"/>
+                     <Enum Name="ramp" Value="RAMP"/>
+                     <Enum Name="pseudo-random noise" Value="PRNoise"/>
+                     <Enum Name="DC" Value="DC"/>
+                     <Enum Name="Sinc" Value="SINC"/>
+                     <Enum Name="Gaussian" Value="GAUSsian"/>
+                     <Enum Name="Lorentz" Value="LORentz"/>
+                     <Enum Name="Erise" Value="ERISe"/>
+                     <Enum Name="Edecay" Value="EDECay"/>
+                     <Enum Name="Haversine" Value="HAVersine"/>
+                     <Enum Name="User1" Value="USER1"/>
+                     <Enum Name="User2" Value="USER2"/>
+                     <Enum Name="User3" Value="USER3"/>
+                     <Enum Name="User4" Value="USER4"/>
+                     <Enum Name="EMemory" Value="EMEMory"/>
+                     <Enum Name="EFile" Value="EFILe"/>
+                  </ConstraintValue>
+               </PermissibleType>
+               <DefaultValue>sin</DefaultValue>
+               <ReadOnly>never</ReadOnly>
+               <Description/>
+            </Property>
+         </PropertyInfo>
+         <MethodInfo/>
+      </Group>
+   </GroupInfo>
+</MATLABInstrumentDriver>
