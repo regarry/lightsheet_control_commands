@@ -121,10 +121,27 @@ fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 
 <h1 id='3'>Arbitrary Founction generator</h1>  
 
-Reference https://mmrc.caltech.edu/Tektronics/AFG3021B/AFG3021B%20Programmer%20Manual.pdf
+Reference https://mmrc.caltech.edu/Tektronics/AFG3021B/AFG3021B%20Programmer%20Manual.pdf 
+
+Scripts in AfgCode/  
+MMcodeOrcaV2/app_for_lightsheet_V2_main.mlapp `AFG_scan` and `Roll Scan` button  
 
 ```Matlab
-
+# scanning
+SetAfgRamp(afg, vLow, vHigh, frequency, symmetry,path)
+# turn on and off of channels
+fwrite(afg, ':output1 on;');
+fwrite(afg, ':output1 off;');
+# set DC offset
+fwrite(afg, ':source1:function DC');
+fwrite(afg, [':source1:voltage:offset ',num2str((value),'mv']);
+fwrite(afg, ':output1 on;');
+# sychronize tow channels to perform roll angle
+fwrite(afg, ':output2 off;');
+SetAfgRamp_roll(afg, proportion*vLow, proportion*vHigh,frequency,symmtry,path);
+fwrite(afg, [':source2:phase:adjust 0deg']); % Set phase 0degree
+fwrite(afg, ':source1:phase:initiate'); % This command synchronizes the phase of CH 1 and CH 2 output waveforms
+fwrite(afg, ':output2 on;');
 ```
 
 <h1 id='4'>Sample 3D stage</h1>  
