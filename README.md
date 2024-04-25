@@ -1,7 +1,8 @@
 ## Lightsheet_control_commands references
 Basic hardware command line for light sheet system control   
-Useful link https://micro-manager.org/Micro-Manager_Programming_Guide
-
+Useful link:  
+-https://micro-manager.org/Micro-Manager_Programming_Guide  
+-https://javadoc.scijava.org/Micro-Manager-Core/mmcorej/CMMCore.html
 * [**System initialzation**](#1)
  * [1.1 Laser](#1.1)
  * [1.2 Filter wheel](#1.2)
@@ -125,10 +126,40 @@ fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 ```
 
 <h1 id='4'>Sample 3D stage</h1>  
+Reference https://javadoc.scijava.org/Micro-Manager-Core/mmcorej/CMMCore.html  
 
 ```Matlab
+# the property name can be found in micro manager/device browser
+# the sample xyz is not the same as the stage xyz according to the actual placement we make in the system
+# on z axis
+# check current position 
+app.controlParameters.MMC.getYPosition();
+# move sample stage by relative distance
+app.controlParameters.MMC.setRelativeXYPosition('XYStage:XY:31',0,value);
+app.controlParameters.MMC.waitForDevice('XYStage:XY:31');
+
+# up and down
+# read posiiton
+current_x = app.controlParameters.MMC.getXPosition();
+# move sample by relative distance
+app.controlParameters.MMC.setRelativeXYPosition('XYStage:XY:31',value,0);
+app.controlParameters.MMC.waitForDevice('XYStage:XY:31');
+
+# left and right
+# read position
+current_z = app.controlParameters.MMC.getPosition('ZStage:Z:32');
+# move sample by relative distance
+app.controlParameters.MMC.setRelativePosition('ZStage:Z:32',app.Stage_step_Z);
+app.controlParameters.MMC.waitForDevice('ZStage:Z:32');
+
+# rotation
+# current not used
+app.controlParameters.MMC.setRelativePosition('ZStage:T:32',-app.Stage_step_T);
+app.controlParameters.MMC.waitForDevice('ZStage:T:32');
+app.controlParameters.MMC.getPosition('ZStage:T:32');
 
 ```
+
 
 <h1 id='5'>Use python packages and scipts</h1>  
 
