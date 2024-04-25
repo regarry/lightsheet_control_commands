@@ -165,7 +165,7 @@ app.controlParameters.MMC.getPosition('ZStage:T:32');
 
 <h1 id='5'>Use python packages and scipts</h1>  
 
-Start Matlab by typing `matlab` in Anaconda prompt (under the activated environment)  
+Start Matlab by typing `matlab` in Anaconda prompt (under the activated environment), so the required packages can be automaticially loaded.  
 
 Relevent file contains using python script in Malab can be found under  
 
