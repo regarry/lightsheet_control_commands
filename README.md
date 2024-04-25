@@ -162,11 +162,13 @@ app.controlParameters.MMC.getPosition('ZStage:T:32');
 
 
 <h1 id='5'>Use python packages and scipts</h1>  
-Start Matlab by typing '''matlab''' in Anaconda prompt (under the activated environment)  
-relevent file contains using python script in Malab can be found under  
-MMcodeOrcaV2/app_for_lightsheet_V2_deeplearning.mlapp ```deep learning autofocus``` button
-MMcodeOrcaV2/img_stack_pred.m
-MMcodeOrcaV2/pred_img_6nm.py
+Start Matlab by typing '''matlab''' in Anaconda prompt (under the activated environment)   
+
+Relevent file contains using python script in Malab can be found under  
+
+MMcodeOrcaV2/app_for_lightsheet_V2_deeplearning.mlapp ```deep learning autofocus``` button  
+MMcodeOrcaV2/img_stack_pred.m  
+MMcodeOrcaV2/pred_img_6nm.py  
 
 
 
