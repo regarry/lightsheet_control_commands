@@ -116,6 +116,66 @@ fprintf(sExtLens1,['1PA','4.70']); % A means absolute
 <h1 id='2'> Camera</h1>  
 
 ```Matlab
+# exposure time setting
+MMC.setProperty('HamamatsuHam_DCAM','Exposure',value);
+# two ways to capture image, continus mode or grap
+# image acquistion continuous mode
+app.controlParameters.MMC.stopSequenceAcquisition;
+app.controlParameters.MMC.clearCircularBuffer;%Make sure the buffer is empty
+numOfImages = 1000000;
+intervalMs = 0;
+stopOnOverflow = false;
+MMC.startSequenceAcquisition(numOfImages, intervalMs, stopOnOverflow);
+checkBuffer = app.controlParameters.MMC.getRemainingImageCount();
+if checkBuffer==0
+  pause(0.5);
+end
+width = app.controlParameters.MMC.getImageWidth();
+height = app.controlParameters.MMC.getImageHeight();
+pixelType = 'uint16';
+% save images
+while(app.controlParameters.MMC.getRemainingImageCount()>0 || app.controlParameters.MMC.isSequenceRunning())
+    if app.controlParameters.MMC.getRemainingImageCount()>0
+        image = app.controlParameters.MMC.getLastImage();  % returned as a 1D array of signed integers in row-major order
+        image = typecast(image, pixelType);      % pixels must be interpreted as unsigned integers
+        image = reshape(image, [width, height]); % image should be interpreted as a 2D array
+        Image = rot90(image);
+        image_path = [filefoldername,'/',firstaxis,'_',secondaxis,'_',thirdaxis,'.tiff'];
+        imwrite(Image,image_path);
+        break;
+    end
+end
+
+% single grap one image
+mmc.setProperty('HamamatsuHam_DCAM','EXPOSURE FULL RANGE','ENABLE');
+app.mmc.snapImage();
+checkBuffer = app.mmc.getRemainingImageCount();      
+if checkBuffer==0
+  pause(0.5);
+end
+while app.mmc.isSequenceRunning()
+  pause(0.1);
+end
+img = app.mmc.getImage();
+width = app.mmc.getImageWidth();
+height = app.mmc.getImageHeight();
+pixelType = 'uint16';
+image = typecast(img, pixelType);      % pixels must be interpreted as unsigned integers
+image = reshape(image, [width, height]); % image should be interpreted as a 2D array
+image = rot90(image);
+imwrite(image,img_path);
+
+% rolling shutter mode of camera
+% set to light sheet mode, currently not in use
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM','SENSOR MODE','PROGRESSIVE'); %AREA
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM','READOUT DIRECTION', 'BACKWARD'); %    BACKWARD
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM', 'TRIGGER SOURCE', 'EXTERNAL'); %  INTERNAL
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM', 'TriggerPolarity', 'POSITIVE');
+
+lines_covered = 20;
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM','TRIGGER DELAY', app.Trigger_delayEditField.Value);
+app.controlParameters.MMC.setProperty('HamamatsuHam_DCAM', 'INTERNAL LINE SPEED',app.Line_speedEdithamField.Value);
+interval = app.controlParameters.MMC.getProperty('HamamatsuHam_DCAM', 'INTERNAL LINE INTERVAL');
 
 ```
 
