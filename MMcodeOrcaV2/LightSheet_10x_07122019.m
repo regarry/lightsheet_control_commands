@@ -15,8 +15,8 @@ addpath('D:\lightSheetsourcecode_twopath\AfgCode','D:\lightSheetsourcecode_twopa
 %% SETUP (initialize stages, galvos, camera, and shutter)
 %run app_test
 % Which lasers to use
-% [488,561,640]; 
-avilableLasers = [1 1 1];
+% [488,561,640,730]; 
+avilableLasers = [1 1 1 1];
 lightSheetMode = false;
 
 pixelSizeUm = 6.5;
@@ -38,13 +38,17 @@ portFWDet = 'COM11'; % Filter wheel (detection)
 portObis488nm = 'COM4'; % 488nm Laser
 portObis561nm = 'COM5'; % 561nm Laser
 portObis640nm = 'COM6'; % 640nm Laser
+portObis730nm = 'COM17'; % 730nm Laser
 %portExt2 = 'COM19';
 
 % Initiate the filter wheel
 [sFWDet] = InitFW(portFWDet);
+% 1 is empty
 % 2 is for 525-39 mm
 % 3 is for 593/40-25 mm
-% 4 is for 676/37-25 
+% 4 is for 676/37-25
+% 5 is for 785/62
+% 6 is for semrock multi band notch filter 405/10, 488, 561, 635/9 Semrock Part Number: NF03-405/488/561/635E-25
 sFWExt = 0;
 % Init stages
 % Path 1 excitation
@@ -91,10 +95,11 @@ mmc.setTimeoutMs(50000);
 mmc.getTimeoutMs()
 
 %% LASER SETUP (initiate the lasers based on availability)
-%488 nm 
+
 fprintf(sExtLens1,['1PA','4.56']);
 
-disp('lasers set up.')
+disp('laser set up...')
+%488 nm 
 if (avilableLasers(1))
     [s488nm] = InitObis(portObis488nm);    
 end
@@ -106,7 +111,10 @@ end
 if (avilableLasers(3))
     [s640nm] = InitObis(portObis640nm);    
 end
-
+% 730 nm
+if (avilableLasers(4))
+    [s730nm] = InitObis(portObis730nm);    
+end
 %Define lasers parameters
 %Control type:
 %PS - power supply
@@ -196,14 +204,25 @@ if (avilableLasers(3))
     allLasers(indAllLasers) = laser640nm;    
 end
 
+%730nm laser 
+if (avilableLasers(4))
+    laser730nm = laserParameters;
+    laser730nm.wavelength = 730;
+    laser730nm.serialPort = s730nm;
+    indAllLasers = indAllLasers + 1;
+    allLasers(indAllLasers) = laser730nm;    
+end
+
 SwitchOnOffObis(allLasers(1).serialPort,0); 
 SwitchOnOffObis(allLasers(2).serialPort,0); 
-if avilableLasers(1) 
-    SwitchOnOffObis(allLasers(3).serialPort,0);
-    ChangePowerObis(allLasers(3).serialPort,1,5);
-end
+SwitchOnOffObis(allLasers(3).serialPort,0);
+SwitchOnOffObis(allLasers(4).serialPort,0);
+
 ChangePowerObis(allLasers(1).serialPort,1,5);
 ChangePowerObis(allLasers(2).serialPort,1,5);
+ChangePowerObis(allLasers(3).serialPort,1,5);
+ChangePowerObis(allLasers(4).serialPort,1,5);
+
 
 
 %%  load previus dm dont run this
